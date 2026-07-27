@@ -1,0 +1,41 @@
+.dashboard-layout {
+  min-height: 100vh;
+  display: flex;
+  background: #f8fafc;
+}
+
+.dashboard-sidebar {
+  width: 270px;
+  flex-shrink: 0;
+}
+
+.dashboard-main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.dashboard-page-content {
+  padding: 24px;
+}
+
+@media (max-width: 992px) {
+  .dashboard-sidebar {
+    width: 80px;
+  }
+}
+
+@media (max-width: 768px) {
+  .dashboard-layout {
+    flex-direction: column;
+  }
+
+  .dashboard-sidebar {
+    width: 100%;
+  }
+
+  .dashboard-page-content {
+    padding: 16px;
+  }
+}

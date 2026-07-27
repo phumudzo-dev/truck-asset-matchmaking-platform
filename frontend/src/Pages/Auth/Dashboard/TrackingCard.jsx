@@ -1,4 +1,4 @@
-import DashboardLayout from "../../layouts/DashboardLayout";
+import DashboardLayouts from "../../../Components/Layout/DashboardLayouts";
 import {
   FaMapMarkerAlt,
   FaTruckMoving,
@@ -9,11 +9,11 @@ import {
   FaCheckCircle,
 } from "react-icons/fa";
 
-import "./Tracking.css";
+import "./TrackingCard.css";
 
 const Tracking = () => {
   return (
-    <DashboardLayout>
+    <DashboardLayouts>
 
       <div className="tracking-page-header">
         <h1>Shipment Tracking</h1>
@@ -148,7 +148,7 @@ const Tracking = () => {
 
       </div>
 
-    </DashboardLayout>
+    </DashboardLayouts>
   );
 };
 

@@ -14,7 +14,7 @@ import {
 } from "react-icons/fa";
 
 import { NavLink } from "react-router-dom";
-import "./Sidebar.css";
+import "../styles/sidebar.css";
 
 const Sidebar = () => {
   const menuItems = [

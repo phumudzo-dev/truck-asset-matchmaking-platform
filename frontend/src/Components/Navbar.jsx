@@ -5,7 +5,7 @@ import {
   FaChevronDown,
 } from "react-icons/fa";
 
-import "./Navbar.css";
+import "../styles/navbar.css";
 
 const Navbar = () => {
   return (
