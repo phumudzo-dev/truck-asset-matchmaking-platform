@@ -1,0 +1,88 @@
+.table-card {
+  background: white;
+  border-radius: 20px;
+  padding: 25px;
+  margin-top: 40px;
+  box-shadow: 0 10px 30px rgba(0,0,0,.06);
+  overflow-x: auto;
+}
+
+.table-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 25px;
+}
+
+.table-header h2 {
+  color: #1E3A8A;
+}
+
+.table-header button {
+  background: #1E3A8A;
+  color: white;
+  border: none;
+  padding: 10px 18px;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+thead {
+  background: #F3F4F6;
+}
+
+th,
+td {
+  padding: 16px;
+  text-align: left;
+}
+
+tbody tr {
+  border-bottom: 1px solid #ECECEC;
+}
+
+tbody tr:hover {
+  background: #F8FAFC;
+}
+
+.status {
+  padding: 8px 14px;
+  border-radius: 30px;
+  color: white;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.delivered {
+  background: #22C55E;
+}
+
+.pending {
+  background: #F59E0B;
+}
+
+.transit {
+  background: #2563EB;
+}
+
+.cancelled {
+  background: #EF4444;
+}
+
+.view-btn {
+  background: #1E3A8A;
+  color: white;
+  border: none;
+  padding: 8px 18px;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.view-btn:hover {
+  background: #16347A;
+}
