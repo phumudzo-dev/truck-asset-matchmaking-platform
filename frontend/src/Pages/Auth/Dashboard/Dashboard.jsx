@@ -1,6 +1,6 @@
-import DashboardLayout from "../../layouts/DashboardLayout";
+import DashboardLayouts from "../../../Components/Layout/DashboardLayouts";
 
-import StatCard from "../../components/StatCard";
+import StatCard from "../../../Components/Statcard";
 
 import {
   FaTruck,
@@ -11,31 +11,23 @@ import {
 
 const Dashboard = () => {
   return (
-    <DashboardLayout>
+    <DashboardLayouts>
+      <div style={{ display: "flex", flexDirection: "column", gap: "8px" }}>
+        <h1 style={{ margin: 0, fontSize: "2rem", color: "#111827" }}>
+          Welcome Back
+        </h1>
 
-      <h1
-        style={{
-          marginBottom: "10px",
-        }}
-      >
-        Welcome Back 
-      </h1>
-
-      <p
-        style={{
-          color: "#6B7280",
-          marginBottom: "30px",
-        }}
-      >
-        Here's an overview of today's logistics activity.
-      </p>
+        <p style={{ margin: 0, color: "#6B7280", fontSize: "1rem" }}>
+          Here's an overview of today's logistics activity.
+        </p>
+      </div>
 
       <div
         style={{
           display: "grid",
-          gridTemplateColumns:
-            "repeat(auto-fit,minmax(250px,1fr))",
-          gap: "25px",
+          gridTemplateColumns: "repeat(auto-fit, minmax(240px, 1fr))",
+          gap: "20px",
+          marginTop: "24px",
         }}
       >
         <StatCard
@@ -67,7 +59,7 @@ const Dashboard = () => {
         />
       </div>
 
-    </DashboardLayout>
+    </DashboardLayouts>
   );
 };
 
