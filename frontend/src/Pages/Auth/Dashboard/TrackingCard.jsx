@@ -1,4 +1,3 @@
-import DashboardLayouts from "../../../Components/Layout/DashboardLayouts";
 import {
   FaMapMarkerAlt,
   FaTruckMoving,
@@ -13,8 +12,7 @@ import "./TrackingCard.css";
 
 const Tracking = () => {
   return (
-    <DashboardLayouts>
-
+    <>
       <div className="tracking-page-header">
         <h1>Shipment Tracking</h1>
         <p>Track your shipment in real time.</p>
@@ -147,8 +145,7 @@ const Tracking = () => {
         </div>
 
       </div>
-
-    </DashboardLayouts>
+    </>
   );
 };
 

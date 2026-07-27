@@ -1,5 +1,6 @@
 import DashboardLayouts from "../../../Components/Layout/DashboardLayouts";
 import StatCard from "../../../Components/Statcard";
+import AnalyticsCard from "../../../Components/AnalyticsCard";
 import TrackingCard from "./TrackingCard";
 import {
   FaTruck,
@@ -146,21 +147,28 @@ const Dashboard = ({ user }) => {
   return (
     <DashboardLayouts>
       <div style={{ display: "flex", flexDirection: "column", gap: "24px" }}>
-        <div
+        <section
           style={{
+            background: "#fff",
+            borderRadius: "20px",
+            padding: "28px",
+            boxShadow: "0 20px 40px rgba(0,0,0,0.05)",
             display: "flex",
             justifyContent: "space-between",
-            alignItems: "flex-start",
-            gap: "16px",
+            alignItems: "center",
+            gap: "20px",
             flexWrap: "wrap",
           }}
         >
           <div>
-            <h1 style={{ margin: 0, fontSize: "2rem", color: "#111827" }}>
-              Welcome Back, {user?.firstName || "there"}
+            <p style={{ margin: 0, color: "#6B7280", fontWeight: 600, letterSpacing: "0.08em" }}>
+              {roleLabel.toUpperCase()} DASHBOARD
+            </p>
+            <h1 style={{ margin: "10px 0 0", fontSize: "2rem", color: "#111827" }}>
+              Welcome back, {user?.firstName || "there"}
             </h1>
-            <p style={{ margin: "6px 0 0", color: "#6B7280", fontSize: "1rem" }}>
-              {roleLabel} dashboard overview for today's logistics activity.
+            <p style={{ margin: "10px 0 0", color: "#6B7280", fontSize: "1rem", maxWidth: "560px" }}>
+              A refined overview of your latest shipments, loads, and performance metrics.
             </p>
           </div>
 
@@ -168,15 +176,16 @@ const Dashboard = ({ user }) => {
             style={{
               background: "#eff6ff",
               color: "#1e3a8a",
-              padding: "10px 14px",
+              padding: "12px 18px",
               borderRadius: "999px",
               fontWeight: 600,
               fontSize: "14px",
+              whiteSpace: "nowrap",
             }}
           >
             {isTransporter ? "12 active trips" : isFreightOwner ? "6 active shipments" : "12 active shipments"}
           </div>
-        </div>
+        </section>
 
         <div
           style={{
@@ -190,6 +199,7 @@ const Dashboard = ({ user }) => {
           ))}
         </div>
 
+        <AnalyticsCard />
         <TrackingCard />
 
         <div style={{ display: "flex", flexDirection: "column", gap: "16px" }}>
