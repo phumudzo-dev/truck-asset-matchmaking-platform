@@ -15,6 +15,7 @@ import Reports from "./Pages/Auth/Dashboard/Reports";
 import Profile from "./Pages/Auth/Dashboard/Profile";
 import Settings from "./Pages/Auth/Dashboard/Settings";
 import ForgotPassword from "./Pages/Auth/ForgotPassword";
+import SaveFeedback from "./Components/SaveFeedback";
 
 function App() {
   const [accounts, setAccounts] = useState(() => {
@@ -92,6 +93,7 @@ function App() {
   };
 
   return (
+    <>
     <Routes>
       <Route path="/" element={<Login onLogin={handleLogin} />} />
       <Route path="/login" element={<Login onLogin={handleLogin} />} />
@@ -110,6 +112,8 @@ function App() {
       <Route path="/profile" element={<Profile />} />
       <Route path="/settings" element={<Settings />} />
     </Routes>
+    <SaveFeedback />
+    </>
   );
 }
 
