@@ -3,7 +3,7 @@ import { FaSearch, FaBell, FaEnvelope, FaChevronDown } from "react-icons/fa";
 import { useLocation, useNavigate } from "react-router-dom";
 import "../styles/navbar.css";
 
-const pages = [["Dashboard", "/dashboard"], ["Post Load", "/post-load"], ["My Loads", "/my-loads"], ["Match Recommendations", "/match-recommendations"], ["Shipments", "/shipments"], ["Tracking", "/tracking"], ["Ratings & Reviews", "/ratings"], ["Messages", "/messages"], ["Reports", "/reports"], ["Profile", "/profile"], ["Settings", "/settings"]];
+const pages = [["Dashboard", "/dashboard"], ["Post Load", "/post-load"], ["My Loads", "/my-loads"], ["Match Recommendations", "/match-recommendations"], ["Shipments", "/shipments"], ["Tracking", "/tracking"], ["Ratings & Reviews", "/ratings"], ["Messages", "/messages"], ["Reports", "/reports"], ["Profile", "/profile"], ["Settings", "/settings"], ["Notifications", "/notifications"]];
 
 const Navbar = () => {
   const navigate = useNavigate();

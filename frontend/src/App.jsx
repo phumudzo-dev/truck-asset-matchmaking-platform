@@ -14,6 +14,7 @@ import Messages from "./Pages/Auth/Dashboard/Messages";
 import Reports from "./Pages/Auth/Dashboard/Reports";
 import Profile from "./Pages/Auth/Dashboard/Profile";
 import Settings from "./Pages/Auth/Dashboard/Settings";
+import Notifications from "./Pages/Auth/Dashboard/Notifications";
 import ForgotPassword from "./Pages/Auth/ForgotPassword";
 import SaveFeedback from "./Components/SaveFeedback";
 
@@ -111,6 +112,7 @@ function App() {
       <Route path="/reports" element={<Reports />} />
       <Route path="/profile" element={<Profile />} />
       <Route path="/settings" element={<Settings />} />
+      <Route path="/notifications" element={<Notifications />} />
     </Routes>
     <SaveFeedback />
     </>
