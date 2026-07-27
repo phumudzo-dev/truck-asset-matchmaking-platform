@@ -1,6 +1,5 @@
 import DashboardLayouts from "../../../Components/Layout/DashboardLayouts";
 import StatCard from "../../../Components/Statcard";
-import AnalyticsCard from "../../../Components/AnalyticsCard";
 import TrackingCard from "./TrackingCard";
 import {
   FaTruck,
@@ -191,7 +190,6 @@ const Dashboard = ({ user }) => {
           ))}
         </div>
 
-        <AnalyticsCard />
         <TrackingCard />
 
         <div style={{ display: "flex", flexDirection: "column", gap: "16px" }}>
