@@ -9,6 +9,10 @@
     transition:.3s;
     min-height:130px;
     width:100%;
+    border: 1px solid #eef2f7;
+    text-align: left;
+    cursor: pointer;
+    font: inherit;
 }
 
 .stat-card:hover{
@@ -46,3 +50,5 @@
     margin:0;
     line-height:1.1;
 }
+
+.stat-card:focus-visible { outline: 3px solid #f59e0b; outline-offset: 3px; }

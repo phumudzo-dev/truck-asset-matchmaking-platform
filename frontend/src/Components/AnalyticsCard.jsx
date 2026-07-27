@@ -1,8 +1,8 @@
 import "./AnalyticsCard.css";
 
-const AnalyticsCard = () => {
+const AnalyticsCard = ({ onClick }) => {
   return (
-    <div className="analytics-card">
+    <div className="analytics-card" role="button" tabIndex="0" onClick={onClick} onKeyDown={(event) => event.key === "Enter" && onClick?.()} aria-label="Open reports and analytics">
 
       <div className="analytics-header">
 

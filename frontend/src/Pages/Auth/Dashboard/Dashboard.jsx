@@ -50,8 +50,8 @@ const QuickActionCard = ({ title, icon, onClick }) => (
   </button>
 );
 
-const ActivityCard = ({ title, time, color }) => (
-  <div
+const ActivityCard = ({ title, time, color, onClick }) => (
+  <button type="button" onClick={onClick}
     style={{
       display: "flex",
       alignItems: "center",
@@ -59,6 +59,7 @@ const ActivityCard = ({ title, time, color }) => (
       padding: "16px 18px",
       borderBottom: "1px solid #f3f4f6",
       gap: "12px",
+      background: "white", border: "none", width: "100%", cursor: "pointer", textAlign: "left",
     }}
   >
     <div style={{ display: "flex", alignItems: "center", gap: "12px" }}>
@@ -76,7 +77,7 @@ const ActivityCard = ({ title, time, color }) => (
       </div>
     </div>
     <span style={{ fontSize: "13px", color: "#6b7280" }}>View</span>
-  </div>
+  </button>
 );
 
 const Dashboard = ({ user }) => {
@@ -87,23 +88,23 @@ const Dashboard = ({ user }) => {
 
   const statCards = isTransporter
     ? [
-        { title: "Active Loads", value: "24", icon: <FaTruck />, color: "#1E3A8A" },
-        { title: "Trips Today", value: "8", icon: <FaClipboardList />, color: "#F59E0B" },
-        { title: "Accepted Matches", value: "19", icon: <FaHandshake />, color: "#22C55E" },
-        { title: "Earnings", value: "$18,400", icon: <FaDollarSign />, color: "#0EA5E9" },
+        { title: "Active Loads", value: "24", icon: <FaTruck />, color: "#1E3A8A", path: "/my-loads" },
+        { title: "Trips Today", value: "8", icon: <FaClipboardList />, color: "#F59E0B", path: "/shipments" },
+        { title: "Accepted Matches", value: "19", icon: <FaHandshake />, color: "#22C55E", path: "/match-recommendations" },
+        { title: "Earnings", value: "$18,400", icon: <FaDollarSign />, color: "#0EA5E9", path: "/reports" },
       ]
     : isFreightOwner
     ? [
-        { title: "Posted Loads", value: "14", icon: <FaTruck />, color: "#1E3A8A" },
-        { title: "Open Shipments", value: "6", icon: <FaClipboardList />, color: "#F59E0B" },
-        { title: "Successful Matches", value: "31", icon: <FaHandshake />, color: "#22C55E" },
-        { title: "Budget Used", value: "$42,800", icon: <FaDollarSign />, color: "#0EA5E9" },
+        { title: "Posted Loads", value: "14", icon: <FaTruck />, color: "#1E3A8A", path: "/my-loads" },
+        { title: "Open Shipments", value: "6", icon: <FaClipboardList />, color: "#F59E0B", path: "/shipments" },
+        { title: "Successful Matches", value: "31", icon: <FaHandshake />, color: "#22C55E", path: "/match-recommendations" },
+        { title: "Budget Used", value: "$42,800", icon: <FaDollarSign />, color: "#0EA5E9", path: "/reports" },
       ]
     : [
-        { title: "Active Loads", value: "42", icon: <FaTruck />, color: "#1E3A8A" },
-        { title: "Shipments", value: "18", icon: <FaClipboardList />, color: "#F59E0B" },
-        { title: "Successful Matches", value: "31", icon: <FaHandshake />, color: "#22C55E" },
-        { title: "Revenue", value: "$42,800", icon: <FaDollarSign />, color: "#0EA5E9" },
+        { title: "Active Loads", value: "42", icon: <FaTruck />, color: "#1E3A8A", path: "/my-loads" },
+        { title: "Shipments", value: "18", icon: <FaClipboardList />, color: "#F59E0B", path: "/shipments" },
+        { title: "Successful Matches", value: "31", icon: <FaHandshake />, color: "#22C55E", path: "/match-recommendations" },
+        { title: "Revenue", value: "$42,800", icon: <FaDollarSign />, color: "#0EA5E9", path: "/reports" },
       ];
 
   const quickActions = isTransporter
@@ -199,11 +200,11 @@ const Dashboard = ({ user }) => {
           }}
         >
           {statCards.map((card) => (
-            <StatCard key={card.title} title={card.title} value={card.value} icon={card.icon} color={card.color} />
+            <StatCard key={card.title} title={card.title} value={card.value} icon={card.icon} color={card.color} onClick={() => navigate(card.path)} />
           ))}
         </div>
 
-        <AnalyticsCard />
+        <AnalyticsCard onClick={() => navigate("/reports")} />
         <TrackingCard />
 
         <div style={{ display: "flex", flexDirection: "column", gap: "16px" }}>
@@ -241,7 +242,7 @@ const Dashboard = ({ user }) => {
             }}
           >
             {activityFeed.map((item) => (
-              <ActivityCard key={item.title} title={item.title} time={item.time} color={item.color} />
+              <ActivityCard key={item.title} title={item.title} time={item.time} color={item.color} onClick={() => navigate(item.title.includes("Message") ? "/messages" : item.title.includes("Trip") || item.title.includes("Shipment") || item.title.includes("Delivery") ? "/tracking" : "/my-loads")} />
             ))}
           </div>
         </div>
