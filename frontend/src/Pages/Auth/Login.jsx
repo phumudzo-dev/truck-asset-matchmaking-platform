@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { FaEnvelope, FaLock, FaEye, FaArrowRight } from "react-icons/fa";
+import { FaEnvelope, FaLock, FaEye, FaArrowRight, FaShieldAlt, FaBolt, FaUsers } from "react-icons/fa";
 import "./Login.css";
 
 const Login = () => {
@@ -36,7 +36,7 @@ const Login = () => {
 
         <div className="features">
           <div className="feature-card">
-            <div className="feature-icon">🛡️</div>
+            <div className="feature-icon"><FaShieldAlt /></div>
 
             <div>
               <h4>Secure</h4>
@@ -45,7 +45,7 @@ const Login = () => {
           </div>
 
           <div className="feature-card">
-            <div className="feature-icon">⚡</div>
+            <div className="feature-icon"><FaBolt /></div>
 
             <div>
               <h4>Efficient</h4>
@@ -54,7 +54,7 @@ const Login = () => {
           </div>
 
           <div className="feature-card">
-            <div className="feature-icon">👥</div>
+            <div className="feature-icon"><FaUsers /></div>
 
             <div>
               <h4>Reliable</h4>

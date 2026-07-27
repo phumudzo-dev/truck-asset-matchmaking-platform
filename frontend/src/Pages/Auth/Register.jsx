@@ -10,6 +10,9 @@ import {
   FaEyeSlash,
   FaUserTag,
   FaArrowRight,
+  FaShieldAlt,
+  FaHandshake,
+  FaClock,
 } from "react-icons/fa";
 
 import "./Register.css";
@@ -93,7 +96,7 @@ const Register = () => {
 
           <div className="feature-card">
 
-            <div className="feature-icon">🛡️</div>
+            <div className="feature-icon"><FaShieldAlt /></div>
 
             <div>
 
@@ -107,7 +110,7 @@ const Register = () => {
 
           <div className="feature-card">
 
-            <div className="feature-icon">🤝</div>
+            <div className="feature-icon"><FaHandshake /></div>
 
             <div>
 
@@ -121,7 +124,7 @@ const Register = () => {
 
           <div className="feature-card">
 
-            <div className="feature-icon">🚛</div>
+            <div className="feature-icon"><FaClock /></div>
 
             <div>
 
