@@ -17,6 +17,31 @@ import "./Register.css";
 const Register = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+  const [formData, setFormData] = useState({
+    firstName: "",
+    lastName: "",
+    email: "",
+    phone: "",
+    company: "",
+    password: "",
+    confirmPassword: "",
+    role: "",
+    agreeToTerms: false,
+  });
+
+  const handleChange = (e) => {
+    const { name, value, type, checked } = e.target;
+
+    setFormData((prev) => ({
+      ...prev,
+      [name]: type === "checkbox" ? checked : value,
+    }));
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    console.log("Register form submitted:", formData);
+  };
 
   return (
     <div className="register-page">
@@ -57,7 +82,7 @@ const Register = () => {
         <div className="truck-section">
 
           <img
-            src="/images/truck-login.png"
+            src="/Images/truck-login.png"
             alt="Truck"
             className="truck-image"
           />
@@ -126,7 +151,7 @@ const Register = () => {
 
           {/* ================= FORM ================= */}
 
-          <form>
+          <form onSubmit={handleSubmit}>
 
             {/* FIRST & LAST NAME */}
 
@@ -142,6 +167,9 @@ const Register = () => {
 
                   <input
                     type="text"
+                    name="firstName"
+                    value={formData.firstName}
+                    onChange={handleChange}
                     placeholder="Enter first name"
                   />
 
@@ -159,6 +187,9 @@ const Register = () => {
 
                   <input
                     type="text"
+                    name="lastName"
+                    value={formData.lastName}
+                    onChange={handleChange}
                     placeholder="Enter last name"
                   />
 
@@ -178,6 +209,9 @@ const Register = () => {
 
               <input
                 type="email"
+                name="email"
+                value={formData.email}
+                onChange={handleChange}
                 placeholder="Enter your email"
               />
 
@@ -193,6 +227,9 @@ const Register = () => {
 
               <input
                 type="tel"
+                name="phone"
+                value={formData.phone}
+                onChange={handleChange}
                 placeholder="Enter your phone number"
               />
 
@@ -208,6 +245,9 @@ const Register = () => {
 
               <input
                 type="text"
+                name="company"
+                value={formData.company}
+                onChange={handleChange}
                 placeholder="Company name"
               />
 
@@ -223,6 +263,9 @@ const Register = () => {
 
               <input
                 type={showPassword ? "text" : "password"}
+                name="password"
+                value={formData.password}
+                onChange={handleChange}
                 placeholder="Create password"
               />
 
@@ -254,6 +297,9 @@ const Register = () => {
 
               <input
                 type={showConfirmPassword ? "text" : "password"}
+                name="confirmPassword"
+                value={formData.confirmPassword}
+                onChange={handleChange}
                 placeholder="Confirm password"
               />
 
@@ -283,7 +329,7 @@ const Register = () => {
 
               <FaUserTag />
 
-              <select>
+              <select name="role" value={formData.role} onChange={handleChange}>
 
                 <option value="">
                   Choose your role
@@ -309,7 +355,12 @@ const Register = () => {
 
             <div className="terms">
 
-              <input type="checkbox" />
+              <input
+                type="checkbox"
+                name="agreeToTerms"
+                checked={formData.agreeToTerms}
+                onChange={handleChange}
+              />
 
               <p>
                 I agree to the{" "}
@@ -330,7 +381,7 @@ const Register = () => {
 
             {/* BUTTON */}
 
-            <button className="register-btn">
+            <button type="submit" className="register-btn">
 
               Register
 
