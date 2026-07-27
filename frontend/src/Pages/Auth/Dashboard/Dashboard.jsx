@@ -1,5 +1,6 @@
 import DashboardLayouts from "../../../Components/Layout/DashboardLayouts";
 import StatCard from "../../../Components/Statcard";
+import AnalyticsCard from "../../../Components/AnalyticsCard";
 import {
   FaTruck,
   FaClipboardList,
@@ -142,6 +143,8 @@ const Dashboard = () => {
             <QuickActionCard title="Reports" icon={<FaChartBar />} />
           </div>
         </div>
+
+        <AnalyticsCard />
 
         <div style={{ display: "flex", flexDirection: "column", gap: "12px" }}>
           <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
