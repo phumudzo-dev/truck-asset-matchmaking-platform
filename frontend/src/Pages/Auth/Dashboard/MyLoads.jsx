@@ -1,3 +1,4 @@
+import { useState } from "react";
 import DashboardLayout from "../../layouts/DashboardLayout";
 import { useNavigate } from "react-router-dom";
 import {
@@ -35,10 +36,19 @@ const loads = [
     status: "Delivered",
     date: "25 Jul 2026",
   },
+  { id: "LD-1004", title: "Steel Beams", pickup: "Vereeniging", delivery: "Gqeberha", status: "Delivered", date: "22 Jul 2026" },
+  { id: "LD-1005", title: "Retail Stock", pickup: "Cape Town", delivery: "George", status: "Pending", date: "28 Jul 2026" },
+  { id: "LD-1006", title: "Agricultural Equipment", pickup: "Kimberley", delivery: "Johannesburg", status: "Cancelled", date: "20 Jul 2026" },
 ];
 
 const MyLoads = () => {
   const navigate = useNavigate();
+  const [query, setQuery] = useState("");
+  const [filter, setFilter] = useState("All");
+  const filteredLoads = loads.filter((load) => {
+    const matchesSearch = Object.values(load).some((value) => value.toLowerCase().includes(query.toLowerCase()));
+    return matchesSearch && (filter === "All" || load.status === filter);
+  });
   return (
     <DashboardLayout>
 
@@ -72,6 +82,8 @@ const MyLoads = () => {
 
         <input
           placeholder="Search load..."
+          value={query}
+          onChange={(event) => setQuery(event.target.value)}
         />
 
       </div>
@@ -80,17 +92,7 @@ const MyLoads = () => {
 
       <div className="filters">
 
-        <button className="active">
-          All
-        </button>
-
-        <button>Pending</button>
-
-        <button>In Transit</button>
-
-        <button>Delivered</button>
-
-        <button>Cancelled</button>
+        {["All", "Pending", "In Transit", "Delivered", "Cancelled"].map((status) => <button key={status} className={filter === status ? "active" : ""} onClick={() => setFilter(status)}>{status}</button>)}
 
       </div>
 
@@ -124,7 +126,7 @@ const MyLoads = () => {
 
           <tbody>
 
-            {loads.map((load) => (
+            {filteredLoads.map((load) => (
 
               <tr key={load.id}>
 
@@ -179,6 +181,7 @@ const MyLoads = () => {
               </tr>
 
             ))}
+            {!filteredLoads.length && <tr><td colSpan="7" className="empty-state">No loads found. Try another search or filter.</td></tr>}
 
           </tbody>
 

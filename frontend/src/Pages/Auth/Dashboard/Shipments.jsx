@@ -1,3 +1,4 @@
+import { useState } from "react";
 import DashboardLayout from "../../layouts/DashboardLayout";
 import { useNavigate } from "react-router-dom";
 import {
@@ -38,10 +39,19 @@ const shipments = [
     pickup: "24 Jul 2026",
     delivery: "25 Jul 2026",
   },
+  { id: "SH-1004", load: "Steel Beams", transporter: "Swift Logistics", route: "Vereeniging → Gqeberha", status: "Delivered", pickup: "20 Jul 2026", delivery: "22 Jul 2026" },
+  { id: "SH-1005", load: "Retail Stock", transporter: "RoadLink", route: "Cape Town → George", status: "Pending", pickup: "28 Jul 2026", delivery: "29 Jul 2026" },
+  { id: "SH-1006", load: "Machinery", transporter: "Cargo Express", route: "Kimberley → Johannesburg", status: "Delivered", pickup: "18 Jul 2026", delivery: "20 Jul 2026" },
 ];
 
 const Shipments = () => {
   const navigate = useNavigate();
+  const [query, setQuery] = useState("");
+  const [filter, setFilter] = useState("All");
+  const filteredShipments = shipments.filter((shipment) => {
+    const matchesSearch = Object.values(shipment).some((value) => value.toLowerCase().includes(query.toLowerCase()));
+    return matchesSearch && (filter === "All" || shipment.status === filter);
+  });
   return (
     <DashboardLayout>
 
@@ -56,25 +66,25 @@ const Shipments = () => {
 
       <div className="shipment-stats">
 
-        <div className="shipment-card">
+        <button className={`shipment-card ${filter === "All" ? "selected" : ""}`} onClick={() => setFilter("All")}>
           <h3>24</h3>
           <p>Active Shipments</p>
-        </div>
+        </button>
 
-        <div className="shipment-card">
+        <button className={`shipment-card ${filter === "Delivered" ? "selected" : ""}`} onClick={() => setFilter("Delivered")}>
           <h3>12</h3>
           <p>Delivered</p>
-        </div>
+        </button>
 
-        <div className="shipment-card">
+        <button className={`shipment-card ${filter === "Pending" ? "selected" : ""}`} onClick={() => setFilter("Pending")}>
           <h3>4</h3>
           <p>Pending</p>
-        </div>
+        </button>
 
-        <div className="shipment-card">
+        <button className="shipment-card" onClick={() => alert("No delayed shipments in the included demo data.")}>
           <h3>2</h3>
           <p>Delayed</p>
-        </div>
+        </button>
 
       </div>
 
@@ -84,6 +94,8 @@ const Shipments = () => {
 
         <input
           placeholder="Search shipment..."
+          value={query}
+          onChange={(event) => setQuery(event.target.value)}
         />
 
       </div>
@@ -118,7 +130,7 @@ const Shipments = () => {
 
           <tbody>
 
-            {shipments.map((shipment) => (
+            {filteredShipments.map((shipment) => (
 
               <tr key={shipment.id}>
 
@@ -163,6 +175,7 @@ const Shipments = () => {
               </tr>
 
             ))}
+            {!filteredShipments.length && <tr><td colSpan="8" className="empty-state">No shipments found. Try another search or card.</td></tr>}
 
           </tbody>
 

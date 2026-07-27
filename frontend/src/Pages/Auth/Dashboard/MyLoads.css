@@ -129,3 +129,5 @@ cursor:pointer;
 background:#FEE2E2 !important;
 color:#DC2626;
 }
+
+.empty-state { text-align: center; color: #6b7280; padding: 32px; }
