@@ -1,0 +1,24 @@
+.quick-card{
+    border:none;
+    background:white;
+    border-radius:16px;
+    padding:25px;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    gap:15px;
+    cursor:pointer;
+    box-shadow:0 10px 25px rgba(0,0,0,.05);
+    transition:.3s;
+}
+
+.quick-card:hover{
+    transform:translateY(-5px);
+    background:#1E3A8A;
+    color:white;
+}
+
+.quick-icon{
+    font-size:28px;
+}
