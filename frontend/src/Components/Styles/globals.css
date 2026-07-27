@@ -1,0 +1,23 @@
+@import "./variables.css";
+
+.container{
+
+width:min(1200px,90%);
+
+margin:auto;
+
+}
+
+.page{
+
+min-height:100vh;
+
+display:flex;
+
+align-items:center;
+
+justify-content:center;
+
+padding:40px;
+
+}
