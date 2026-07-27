@@ -2,11 +2,13 @@
   min-height: 100vh;
   display: flex;
   background: #f8fafc;
+  overflow-x: hidden;
 }
 
 .dashboard-sidebar {
   width: 270px;
   flex-shrink: 0;
+  background: #1e3a8a;
 }
 
 .dashboard-main {
@@ -14,10 +16,15 @@
   display: flex;
   flex-direction: column;
   min-width: 0;
+  background: #f8fafc;
 }
 
 .dashboard-page-content {
   padding: 24px;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
 }
 
 @media (max-width: 992px) {

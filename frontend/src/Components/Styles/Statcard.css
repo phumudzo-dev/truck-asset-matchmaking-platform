@@ -1,12 +1,14 @@
 .stat-card{
     background:white;
     border-radius:18px;
-    padding:25px;
+    padding:24px;
     display:flex;
     align-items:center;
-    gap:20px;
+    gap:16px;
     box-shadow:0 10px 30px rgba(0,0,0,.06);
     transition:.3s;
+    min-height:130px;
+    width:100%;
 }
 
 .stat-card:hover{
@@ -14,23 +16,33 @@
 }
 
 .stat-icon{
-    width:65px;
-    height:65px;
+    width:58px;
+    height:58px;
     border-radius:16px;
     display:flex;
     justify-content:center;
     align-items:center;
     color:white;
-    font-size:28px;
+    font-size:24px;
+    flex-shrink:0;
+}
+
+.stat-content {
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
 }
 
 .stat-content h4{
     color:#6B7280;
-    margin-bottom:8px;
+    margin:0 0 6px;
     font-size:15px;
+    font-weight:600;
 }
 
 .stat-content h2{
     color:#1F2937;
-    font-size:30px;
+    font-size:28px;
+    margin:0;
+    line-height:1.1;
 }
