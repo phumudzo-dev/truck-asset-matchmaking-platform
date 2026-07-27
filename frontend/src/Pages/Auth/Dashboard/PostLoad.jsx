@@ -1,7 +1,75 @@
+import { useState } from "react";
 import DashboardLayout from "../../layouts/DashboardLayout";
 import "./PostLoad.css";
 
 const PostLoad = () => {
+  const [loadData, setLoadData] = useState({
+    title: "",
+    cargoType: "",
+    weight: "",
+    quantity: "",
+    pickupAddress: "",
+    pickupCity: "",
+    pickupProvince: "",
+    pickupDate: "",
+    deliveryAddress: "",
+    deliveryCity: "",
+    deliveryProvince: "",
+    deliveryDate: "",
+    truckType: "",
+    trailerType: "",
+    temperatureControlled: "",
+    hazardousGoods: "",
+    notes: "",
+  });
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+
+    setLoadData((prev) => ({
+      ...prev,
+      [name]: value,
+    }));
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    if (
+      !loadData.title ||
+      !loadData.cargoType ||
+      !loadData.pickupAddress ||
+      !loadData.deliveryAddress
+    ) {
+      alert("Please complete all required fields.");
+      return;
+    }
+
+    console.log(loadData);
+
+    alert("Load submitted successfully!");
+
+    setLoadData({
+      title: "",
+      cargoType: "",
+      weight: "",
+      quantity: "",
+      pickupAddress: "",
+      pickupCity: "",
+      pickupProvince: "",
+      pickupDate: "",
+      deliveryAddress: "",
+      deliveryCity: "",
+      deliveryProvince: "",
+      deliveryDate: "",
+      truckType: "",
+      trailerType: "",
+      temperatureControlled: "",
+      hazardousGoods: "",
+      notes: "",
+    });
+  };
+
   return (
     <DashboardLayout>
 
@@ -15,7 +83,7 @@ const PostLoad = () => {
 
       </div>
 
-      <form className="postload-form">
+      <form className="postload-form" onSubmit={handleSubmit}>
 
         {/* LOAD DETAILS */}
 
@@ -31,6 +99,9 @@ const PostLoad = () => {
 
               <input
                 type="text"
+                name="title"
+                value={loadData.title}
+                onChange={handleChange}
                 placeholder="Example: Cement Bags"
               />
 
@@ -40,19 +111,23 @@ const PostLoad = () => {
 
               <label>Cargo Type</label>
 
-              <select>
+              <select
+                name="cargoType"
+                value={loadData.cargoType}
+                onChange={handleChange}
+              >
 
-                <option>Select Cargo</option>
+                <option value="">Select Cargo</option>
 
-                <option>General Goods</option>
+                <option value="General Goods">General Goods</option>
 
-                <option>Food</option>
+                <option value="Food">Food</option>
 
-                <option>Construction</option>
+                <option value="Construction">Construction</option>
 
-                <option>Furniture</option>
+                <option value="Furniture">Furniture</option>
 
-                <option>Fuel</option>
+                <option value="Fuel">Fuel</option>
 
               </select>
 
@@ -64,6 +139,9 @@ const PostLoad = () => {
 
               <input
                 type="number"
+                name="weight"
+                value={loadData.weight}
+                onChange={handleChange}
                 placeholder="25000"
               />
 
@@ -75,6 +153,9 @@ const PostLoad = () => {
 
               <input
                 type="number"
+                name="quantity"
+                value={loadData.quantity}
+                onChange={handleChange}
                 placeholder="150"
               />
 
@@ -92,13 +173,33 @@ const PostLoad = () => {
 
           <div className="grid-2">
 
-            <input placeholder="Pickup Address" />
+            <input
+              name="pickupAddress"
+              value={loadData.pickupAddress}
+              onChange={handleChange}
+              placeholder="Pickup Address"
+            />
 
-            <input placeholder="City" />
+            <input
+              name="pickupCity"
+              value={loadData.pickupCity}
+              onChange={handleChange}
+              placeholder="City"
+            />
 
-            <input placeholder="Province" />
+            <input
+              name="pickupProvince"
+              value={loadData.pickupProvince}
+              onChange={handleChange}
+              placeholder="Province"
+            />
 
-            <input type="date" />
+            <input
+              type="date"
+              name="pickupDate"
+              value={loadData.pickupDate}
+              onChange={handleChange}
+            />
 
           </div>
 
@@ -112,13 +213,33 @@ const PostLoad = () => {
 
           <div className="grid-2">
 
-            <input placeholder="Delivery Address" />
+            <input
+              name="deliveryAddress"
+              value={loadData.deliveryAddress}
+              onChange={handleChange}
+              placeholder="Delivery Address"
+            />
 
-            <input placeholder="City" />
+            <input
+              name="deliveryCity"
+              value={loadData.deliveryCity}
+              onChange={handleChange}
+              placeholder="City"
+            />
 
-            <input placeholder="Province" />
+            <input
+              name="deliveryProvince"
+              value={loadData.deliveryProvince}
+              onChange={handleChange}
+              placeholder="Province"
+            />
 
-            <input type="date" />
+            <input
+              type="date"
+              name="deliveryDate"
+              value={loadData.deliveryDate}
+              onChange={handleChange}
+            />
 
           </div>
 
@@ -132,47 +253,63 @@ const PostLoad = () => {
 
           <div className="grid-2">
 
-            <select>
+            <select
+              name="truckType"
+              value={loadData.truckType}
+              onChange={handleChange}
+            >
 
-              <option>Truck Type</option>
+              <option value="">Truck Type</option>
 
-              <option>Flatbed</option>
+              <option value="Flatbed">Flatbed</option>
 
-              <option>Refrigerated</option>
+              <option value="Refrigerated">Refrigerated</option>
 
-              <option>Tanker</option>
+              <option value="Tanker">Tanker</option>
 
-              <option>Box Truck</option>
-
-            </select>
-
-            <select>
-
-              <option>Trailer Type</option>
-
-              <option>Single</option>
-
-              <option>Double</option>
+              <option value="Box Truck">Box Truck</option>
 
             </select>
 
-            <select>
+            <select
+              name="trailerType"
+              value={loadData.trailerType}
+              onChange={handleChange}
+            >
 
-              <option>Temperature Controlled?</option>
+              <option value="">Trailer Type</option>
 
-              <option>Yes</option>
+              <option value="Single">Single</option>
 
-              <option>No</option>
+              <option value="Double">Double</option>
 
             </select>
 
-            <select>
+            <select
+              name="temperatureControlled"
+              value={loadData.temperatureControlled}
+              onChange={handleChange}
+            >
 
-              <option>Hazardous Goods?</option>
+              <option value="">Temperature Controlled?</option>
 
-              <option>Yes</option>
+              <option value="Yes">Yes</option>
 
-              <option>No</option>
+              <option value="No">No</option>
+
+            </select>
+
+            <select
+              name="hazardousGoods"
+              value={loadData.hazardousGoods}
+              onChange={handleChange}
+            >
+
+              <option value="">Hazardous Goods?</option>
+
+              <option value="Yes">Yes</option>
+
+              <option value="No">No</option>
 
             </select>
 
@@ -188,6 +325,9 @@ const PostLoad = () => {
 
           <textarea
             rows="6"
+            name="notes"
+            value={loadData.notes}
+            onChange={handleChange}
             placeholder="Provide any extra instructions..."
           ></textarea>
 
