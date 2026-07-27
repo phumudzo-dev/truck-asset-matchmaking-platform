@@ -28,7 +28,7 @@ const Login = () => {
 
         <div className="truck-container">
           <img
-            src="/images/truck-login.png"
+            src="/Images/truck-login.png"
             alt="Truck"
             className="truck-image"
           />
