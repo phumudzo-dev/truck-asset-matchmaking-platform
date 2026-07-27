@@ -1,0 +1,23 @@
+.activity-card{
+    display:flex;
+    align-items:center;
+    gap:15px;
+    padding:18px;
+    border-bottom:1px solid #eee;
+}
+
+.activity-dot{
+    width:14px;
+    height:14px;
+    border-radius:50%;
+}
+
+.activity-card h4{
+    margin-bottom:5px;
+    color:#1F2937;
+}
+
+.activity-card p{
+    color:#6B7280;
+    font-size:14px;
+}
