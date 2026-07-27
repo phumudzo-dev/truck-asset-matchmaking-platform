@@ -370,3 +370,21 @@
     height: 50px;
   }
 }
+
+.password-toggle {
+  border: 0;
+  background: transparent;
+  color: gray;
+  cursor: pointer;
+  padding: 2px;
+  font-size: 16px;
+}
+
+.form-message {
+  color: #b91c1c;
+  background: #fef2f2;
+  border-radius: 8px;
+  padding: 10px 12px;
+  margin: -6px 0 16px;
+  font-size: 14px;
+}

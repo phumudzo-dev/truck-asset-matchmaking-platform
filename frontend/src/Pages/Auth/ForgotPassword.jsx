@@ -10,12 +10,13 @@ const ForgotPassword = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    if (!email) {
-      alert("Please enter your email address.");
+    if (!/^\S+@\S+\.\S+$/.test(email)) {
+      alert("Please enter a valid email address.");
       return;
     }
 
     setSubmitted(true);
+    alert(`Password reset instructions have been sent to ${email}.`);
   };
 
   return (
@@ -54,7 +55,7 @@ const ForgotPassword = () => {
         <div className="truck-section">
 
           <img
-            src="/images/truck-login.png"
+            src="/Images/truck-login.png"
             alt="Truck"
             className="truck-image"
           />
@@ -114,8 +115,10 @@ const ForgotPassword = () => {
               <h2>Email Sent!</h2>
 
               <p>
-                Check your inbox for the password reset instructions.
+                Check your inbox at <strong>{email}</strong> for the password reset instructions.
               </p>
+
+              <button className="reset-btn" type="button" onClick={() => alert("Reset instructions sent again.")}>Resend Email <FaArrowRight /></button>
 
             </div>
           )}

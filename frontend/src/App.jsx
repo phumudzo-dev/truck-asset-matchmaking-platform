@@ -14,6 +14,7 @@ import Messages from "./Pages/Auth/Dashboard/Messages";
 import Reports from "./Pages/Auth/Dashboard/Reports";
 import Profile from "./Pages/Auth/Dashboard/Profile";
 import Settings from "./Pages/Auth/Dashboard/Settings";
+import ForgotPassword from "./Pages/Auth/ForgotPassword";
 
 function App() {
   const [accounts, setAccounts] = useState(() => {
@@ -96,6 +97,7 @@ function App() {
       <Route path="/login" element={<Login onLogin={handleLogin} />} />
       <Route path="/register" element={<Register onRegister={handleRegister} />} />
       <Route path="/role-selection" element={<RoleSelection />} />
+      <Route path="/forgot-password" element={<ForgotPassword />} />
       <Route path="/dashboard" element={<Dashboard user={currentUser} />} />
       <Route path="/post-load" element={<PostLoad />} />
       <Route path="/my-loads" element={<MyLoads />} />
