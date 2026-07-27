@@ -11,9 +11,10 @@ import {
   FaChartBar,
   FaArrowRight,
 } from "react-icons/fa";
+import { useNavigate } from "react-router-dom";
 
-const QuickActionCard = ({ title, icon }) => (
-  <div
+const QuickActionCard = ({ title, icon, onClick }) => (
+  <button type="button" onClick={onClick}
     style={{
       background: "#fff",
       borderRadius: "16px",
@@ -23,6 +24,8 @@ const QuickActionCard = ({ title, icon }) => (
       justifyContent: "space-between",
       boxShadow: "0 8px 24px rgba(0,0,0,0.06)",
       border: "1px solid #eef2f7",
+      cursor: "pointer",
+      textAlign: "left",
     }}
   >
     <div style={{ display: "flex", alignItems: "center", gap: "12px" }}>
@@ -44,7 +47,7 @@ const QuickActionCard = ({ title, icon }) => (
       <span style={{ fontWeight: 600, color: "#111827" }}>{title}</span>
     </div>
     <FaArrowRight style={{ color: "#6b7280" }} />
-  </div>
+  </button>
 );
 
 const ActivityCard = ({ title, time, color }) => (
@@ -77,6 +80,7 @@ const ActivityCard = ({ title, time, color }) => (
 );
 
 const Dashboard = ({ user }) => {
+  const navigate = useNavigate();
   const roleLabel = user?.role || "Member";
   const isTransporter = roleLabel === "Transporter";
   const isFreightOwner = roleLabel === "Freight Owner";
@@ -104,23 +108,23 @@ const Dashboard = ({ user }) => {
 
   const quickActions = isTransporter
     ? [
-        { title: "My Trips", icon: <FaTruck /> },
-        { title: "Shipments", icon: <FaClipboardList /> },
-        { title: "Tracking", icon: <FaMapMarkedAlt /> },
-        { title: "Reports", icon: <FaChartBar /> },
+        { title: "My Trips", icon: <FaTruck />, path: "/my-loads" },
+        { title: "Shipments", icon: <FaClipboardList />, path: "/shipments" },
+        { title: "Tracking", icon: <FaMapMarkedAlt />, path: "/tracking" },
+        { title: "Reports", icon: <FaChartBar />, path: "/reports" },
       ]
     : isFreightOwner
     ? [
-        { title: "Post Load", icon: <FaTruck /> },
-        { title: "My Loads", icon: <FaClipboardList /> },
-        { title: "Tracking", icon: <FaMapMarkedAlt /> },
-        { title: "Matches", icon: <FaHandshake /> },
+        { title: "Post Load", icon: <FaTruck />, path: "/post-load" },
+        { title: "My Loads", icon: <FaClipboardList />, path: "/my-loads" },
+        { title: "Tracking", icon: <FaMapMarkedAlt />, path: "/tracking" },
+        { title: "Matches", icon: <FaHandshake />, path: "/match-recommendations" },
       ]
     : [
-        { title: "Post Load", icon: <FaTruck /> },
-        { title: "Shipments", icon: <FaClipboardList /> },
-        { title: "Tracking", icon: <FaMapMarkedAlt /> },
-        { title: "Reports", icon: <FaChartBar /> },
+        { title: "Post Load", icon: <FaTruck />, path: "/post-load" },
+        { title: "Shipments", icon: <FaClipboardList />, path: "/shipments" },
+        { title: "Tracking", icon: <FaMapMarkedAlt />, path: "/tracking" },
+        { title: "Reports", icon: <FaChartBar />, path: "/reports" },
       ];
 
   const activityFeed = isTransporter
@@ -216,7 +220,7 @@ const Dashboard = ({ user }) => {
             }}
           >
             {quickActions.map((action) => (
-              <QuickActionCard key={action.title} title={action.title} icon={action.icon} />
+              <QuickActionCard key={action.title} title={action.title} icon={action.icon} onClick={() => navigate(action.path)} />
             ))}
           </div>
         </div>

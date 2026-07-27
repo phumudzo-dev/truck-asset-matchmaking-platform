@@ -1,8 +1,10 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import DashboardLayout from "../../layouts/DashboardLayout";
 import "./PostLoad.css";
 
 const PostLoad = () => {
+  const navigate = useNavigate();
   const [loadData, setLoadData] = useState({
     title: "",
     cargoType: "",
@@ -68,6 +70,7 @@ const PostLoad = () => {
       hazardousGoods: "",
       notes: "",
     });
+    navigate("/my-loads");
   };
 
   return (
@@ -340,6 +343,7 @@ const PostLoad = () => {
           <button
             type="button"
             className="cancel-btn"
+            onClick={() => navigate("/my-loads")}
           >
             Cancel
           </button>
@@ -347,6 +351,7 @@ const PostLoad = () => {
           <button
             type="button"
             className="draft-btn"
+            onClick={() => { localStorage.setItem("tamp-load-draft", JSON.stringify(loadData)); alert("Draft saved on this device."); }}
           >
             Save Draft
           </button>

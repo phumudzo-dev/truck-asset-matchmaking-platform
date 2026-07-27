@@ -1,4 +1,5 @@
 import DashboardLayout from "../../layouts/DashboardLayout";
+import { useNavigate } from "react-router-dom";
 import {
   FaSearch,
   FaTruck,
@@ -7,7 +8,7 @@ import {
   FaCheckCircle,
 } from "react-icons/fa";
 
-import "./MatchRecommendations.css";
+import "./MatchRecommendation.css";
 
 const transporters = [
   {
@@ -40,6 +41,7 @@ const transporters = [
 ];
 
 const MatchRecommendations = () => {
+  const navigate = useNavigate();
   return (
     <DashboardLayout>
       <div className="match-header">
@@ -90,11 +92,11 @@ const MatchRecommendations = () => {
             </div>
 
             <div className="match-buttons">
-              <button className="profile-btn">
+              <button className="profile-btn" onClick={() => navigate("/profile")}>
                 View Profile
               </button>
 
-              <button className="offer-btn">
+              <button className="offer-btn" onClick={() => navigate("/messages")}>
                 Send Offer
               </button>
             </div>

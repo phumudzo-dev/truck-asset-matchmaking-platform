@@ -1,4 +1,5 @@
 import DashboardLayout from "../../layouts/DashboardLayout";
+import { useNavigate } from "react-router-dom";
 import {
   FaSearch,
   FaPlus,
@@ -37,6 +38,7 @@ const loads = [
 ];
 
 const MyLoads = () => {
+  const navigate = useNavigate();
   return (
     <DashboardLayout>
 
@@ -52,7 +54,7 @@ const MyLoads = () => {
 
         </div>
 
-        <button className="new-load-btn">
+        <button className="new-load-btn" onClick={() => navigate("/post-load")}>
 
           <FaPlus />
 
@@ -152,13 +154,13 @@ const MyLoads = () => {
 
                   <div className="actions">
 
-                    <button>
+                    <button onClick={() => navigate("/shipments")} aria-label={`View ${load.id}`}>
 
                       <FaEye />
 
                     </button>
 
-                    <button>
+                    <button onClick={() => navigate("/post-load")} aria-label={`Edit ${load.id}`}>
 
                       <FaEdit />
 

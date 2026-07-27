@@ -4,6 +4,16 @@ import Login from "./Pages/Auth/Login";
 import Register from "./Pages/Auth/Register";
 import RoleSelection from "./Pages/Auth/RoleSelection";
 import Dashboard from "./Pages/Auth/Dashboard/Dashboard";
+import PostLoad from "./Pages/Auth/Dashboard/PostLoad";
+import MyLoads from "./Pages/Auth/Dashboard/MyLoads";
+import MatchRecommendations from "./Pages/Auth/Dashboard/MatchRecommendations";
+import Shipments from "./Pages/Auth/Dashboard/Shipments";
+import Tracking from "./Pages/Auth/Dashboard/Tracking";
+import Ratings from "./Pages/Auth/Dashboard/Ratings";
+import Messages from "./Pages/Auth/Dashboard/Messages";
+import Reports from "./Pages/Auth/Dashboard/Reports";
+import Profile from "./Pages/Auth/Dashboard/Profile";
+import Settings from "./Pages/Auth/Dashboard/Settings";
 
 function App() {
   const [accounts, setAccounts] = useState(() => {
@@ -87,6 +97,16 @@ function App() {
       <Route path="/register" element={<Register onRegister={handleRegister} />} />
       <Route path="/role-selection" element={<RoleSelection />} />
       <Route path="/dashboard" element={<Dashboard user={currentUser} />} />
+      <Route path="/post-load" element={<PostLoad />} />
+      <Route path="/my-loads" element={<MyLoads />} />
+      <Route path="/match-recommendations" element={<MatchRecommendations />} />
+      <Route path="/shipments" element={<Shipments />} />
+      <Route path="/tracking" element={<Tracking />} />
+      <Route path="/ratings" element={<Ratings />} />
+      <Route path="/messages" element={<Messages />} />
+      <Route path="/reports" element={<Reports />} />
+      <Route path="/profile" element={<Profile />} />
+      <Route path="/settings" element={<Settings />} />
     </Routes>
   );
 }

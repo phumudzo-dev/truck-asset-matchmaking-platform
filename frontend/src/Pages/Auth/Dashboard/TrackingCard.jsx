@@ -9,8 +9,10 @@ import {
 } from "react-icons/fa";
 
 import "./TrackingCard.css";
+import { useNavigate } from "react-router-dom";
 
 const Tracking = () => {
+  const navigate = useNavigate();
   return (
     <>
       <div className="tracking-page-header">
@@ -27,7 +29,7 @@ const Tracking = () => {
           <div className="tracking-card-header">
             <h2>Live Map</h2>
 
-            <button>Open Full Map</button>
+            <button onClick={() => alert("Map preview opened. Live tracking uses the included demo shipment data.")}>Open Full Map</button>
           </div>
 
           <div className="tracking-map">
@@ -100,7 +102,7 @@ const Tracking = () => {
 
             </div>
 
-            <button className="contact-btn">
+            <button className="contact-btn" onClick={() => navigate("/messages")}>
 
               <FaPhone />
 

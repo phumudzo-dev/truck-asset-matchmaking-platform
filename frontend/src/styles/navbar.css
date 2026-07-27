@@ -123,6 +123,12 @@ gap:15px;
 
 cursor:pointer;
 
+border:none;
+
+background:transparent;
+
+text-align:left;
+
 }
 
 .user-profile img{
