@@ -79,14 +79,20 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  margin: 8px 0;
+  margin: 12px 0 0;
+  width: 100%;
+  min-height: 220px;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  border-radius: 22px;
+  padding: 16px;
 }
 
 .truck-image {
-  width: min(100%, 620px);
+  width: min(100%, 560px);
   height: auto;
   display: block;
-  max-height: 340px;
+  max-height: 260px;
   object-fit: contain;
   filter: drop-shadow(0 20px 40px rgba(0, 0, 0, 0.25));
 }
