@@ -12,6 +12,7 @@ import {
   FaArrowRight,
 } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
+import { useState } from "react";
 
 const QuickActionCard = ({ title, icon, onClick }) => (
   <button type="button" onClick={onClick}
@@ -82,6 +83,11 @@ const ActivityCard = ({ title, time, color, onClick }) => (
 
 const Dashboard = ({ user }) => {
   const navigate = useNavigate();
+  const [openPreview, setOpenPreview] = useState(null);
+  const previewRows = openPreview === "loads"
+    ? [{ id: "LD-1001", title: "Cement Bags", status: "In Transit" }, { id: "LD-1003", title: "Food Supplies", status: "Delivered" }, { id: "LD-1004", title: "Steel Beams", status: "Delivered" }, { id: "LD-1005", title: "Retail Stock", status: "Pending" }, { id: "LD-1006", title: "Agricultural Equipment", status: "Cancelled" }]
+    : [{ id: "SH-1001", title: "Cement Bags", status: "In Transit" }, { id: "SH-1003", title: "Food Supplies", status: "Delivered" }, { id: "SH-1004", title: "Steel Beams", status: "Delivered" }, { id: "SH-1005", title: "Retail Stock", status: "Pending" }, { id: "SH-1006", title: "Machinery", status: "Delivered" }];
+  const previewPath = openPreview === "loads" ? "/my-loads" : "/shipments";
   const roleLabel = user?.role || "Member";
   const isTransporter = roleLabel === "Transporter";
   const isFreightOwner = roleLabel === "Freight Owner";
@@ -200,9 +206,14 @@ const Dashboard = ({ user }) => {
           }}
         >
           {statCards.map((card) => (
-            <StatCard key={card.title} title={card.title} value={card.value} icon={card.icon} color={card.color} onClick={() => navigate(card.path)} />
+            <StatCard key={card.title} title={card.title} value={card.value} icon={card.icon} color={card.color} onClick={() => (card.path === "/my-loads" || card.path === "/shipments") ? setOpenPreview(card.path === "/my-loads" ? "loads" : "shipments") : navigate(card.path)} />
           ))}
         </div>
+
+        {openPreview && <section style={{ background: "#fff", borderRadius: "18px", padding: "20px", boxShadow: "0 10px 30px rgba(0,0,0,.06)", border: "1px solid #eef2f7" }} aria-label={`${openPreview} preview`}>
+          <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", gap: "12px", marginBottom: "14px", flexWrap: "wrap" }}><div><h2 style={{ margin: 0, color: "#111827", fontSize: "1.2rem" }}>{openPreview === "loads" ? "Posted Loads" : "Open Shipments"}</h2><p style={{ margin: "5px 0 0", color: "#6b7280", fontSize: "14px" }}>Scroll to review IDs, titles, and delivery status.</p></div><button type="button" onClick={() => navigate(previewPath)} style={{ border: "none", borderRadius: "9px", padding: "10px 14px", background: "#1e3a8a", color: "#fff", fontWeight: 600, cursor: "pointer" }}>View all</button></div>
+          <div style={{ maxHeight: "230px", overflowY: "auto", border: "1px solid #e5e7eb", borderRadius: "12px" }}><table style={{ width: "100%", borderCollapse: "collapse", minWidth: "420px" }}><thead style={{ position: "sticky", top: 0, background: "#f8fafc" }}><tr><th style={{ padding: "12px", textAlign: "left" }}>ID</th><th style={{ padding: "12px", textAlign: "left" }}>Title</th><th style={{ padding: "12px", textAlign: "left" }}>Status</th></tr></thead><tbody>{previewRows.map((row) => <tr key={row.id} style={{ borderTop: "1px solid #eef2f7" }}><td style={{ padding: "12px", fontWeight: 600 }}>{row.id}</td><td style={{ padding: "12px" }}>{row.title}</td><td style={{ padding: "12px" }}><span style={{ color: row.status === "Delivered" ? "#15803d" : row.status === "Pending" ? "#b45309" : "#1d4ed8", fontWeight: 700 }}>{row.status}</span></td></tr>)}</tbody></table></div>
+        </section>}
 
         <AnalyticsCard onClick={() => navigate("/reports")} />
         <TrackingCard />
