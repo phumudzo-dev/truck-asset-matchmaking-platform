@@ -1,0 +1,116 @@
+@import "../Styles/variables.css";
+
+.auth-page {
+  min-height: 100vh;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  background: var(--background);
+}
+
+/* LEFT SIDE */
+
+.auth-left {
+  background: linear-gradient(
+    135deg,
+    var(--primary),
+    #2749b7
+  );
+
+  color: white;
+
+  display: flex;
+
+  flex-direction: column;
+
+  justify-content: center;
+
+  align-items: center;
+
+  padding: 60px;
+}
+
+.brand h1 {
+  font-size: 48px;
+  font-family: var(--heading-font);
+}
+
+.brand p {
+  opacity: .8;
+}
+
+.truck-image {
+  width: 420px;
+  max-width: 100%;
+  margin: 50px 0;
+}
+
+.left-content {
+  max-width: 450px;
+  text-align: center;
+}
+
+.left-content h2 {
+  font-size: 32px;
+  margin-bottom: 20px;
+}
+
+.left-content p {
+  line-height: 1.8;
+  opacity: .9;
+}
+
+/* RIGHT SIDE */
+
+.auth-right {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 40px;
+}
+
+.auth-card {
+  width: 100%;
+  max-width: 460px;
+
+  background: white;
+
+  border-radius: var(--radius-card);
+
+  box-shadow: var(--shadow);
+
+  padding: 50px;
+}
+
+.auth-card h2 {
+  font-size: 34px;
+  margin-bottom: 10px;
+}
+
+.subtitle {
+  color: var(--text-light);
+  margin-bottom: 35px;
+}
+
+/* MOBILE */
+
+@media(max-width:960px){
+
+.auth-page{
+
+grid-template-columns:1fr;
+
+}
+
+.auth-left{
+
+display:none;
+
+}
+
+.auth-card{
+
+padding:35px;
+
+}
+
+}
