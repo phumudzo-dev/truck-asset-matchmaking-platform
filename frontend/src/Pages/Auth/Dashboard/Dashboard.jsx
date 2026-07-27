@@ -76,7 +76,74 @@ const ActivityCard = ({ title, time, color }) => (
   </div>
 );
 
-const Dashboard = () => {
+const Dashboard = ({ user }) => {
+  const roleLabel = user?.role || "Member";
+  const isTransporter = roleLabel === "Transporter";
+  const isFreightOwner = roleLabel === "Freight Owner";
+
+  const statCards = isTransporter
+    ? [
+        { title: "Active Loads", value: "24", icon: <FaTruck />, color: "#1E3A8A" },
+        { title: "Trips Today", value: "8", icon: <FaClipboardList />, color: "#F59E0B" },
+        { title: "Accepted Matches", value: "19", icon: <FaHandshake />, color: "#22C55E" },
+        { title: "Earnings", value: "$18,400", icon: <FaDollarSign />, color: "#0EA5E9" },
+      ]
+    : isFreightOwner
+    ? [
+        { title: "Posted Loads", value: "14", icon: <FaTruck />, color: "#1E3A8A" },
+        { title: "Open Shipments", value: "6", icon: <FaClipboardList />, color: "#F59E0B" },
+        { title: "Successful Matches", value: "31", icon: <FaHandshake />, color: "#22C55E" },
+        { title: "Budget Used", value: "$42,800", icon: <FaDollarSign />, color: "#0EA5E9" },
+      ]
+    : [
+        { title: "Active Loads", value: "42", icon: <FaTruck />, color: "#1E3A8A" },
+        { title: "Shipments", value: "18", icon: <FaClipboardList />, color: "#F59E0B" },
+        { title: "Successful Matches", value: "31", icon: <FaHandshake />, color: "#22C55E" },
+        { title: "Revenue", value: "$42,800", icon: <FaDollarSign />, color: "#0EA5E9" },
+      ];
+
+  const quickActions = isTransporter
+    ? [
+        { title: "My Trips", icon: <FaTruck /> },
+        { title: "Shipments", icon: <FaClipboardList /> },
+        { title: "Tracking", icon: <FaMapMarkedAlt /> },
+        { title: "Reports", icon: <FaChartBar /> },
+      ]
+    : isFreightOwner
+    ? [
+        { title: "Post Load", icon: <FaTruck /> },
+        { title: "My Loads", icon: <FaClipboardList /> },
+        { title: "Tracking", icon: <FaMapMarkedAlt /> },
+        { title: "Matches", icon: <FaHandshake /> },
+      ]
+    : [
+        { title: "Post Load", icon: <FaTruck /> },
+        { title: "Shipments", icon: <FaClipboardList /> },
+        { title: "Tracking", icon: <FaMapMarkedAlt /> },
+        { title: "Reports", icon: <FaChartBar /> },
+      ];
+
+  const activityFeed = isTransporter
+    ? [
+        { title: "Trip Assigned", time: "5 minutes ago", color: "#22C55E" },
+        { title: "Delivery Confirmed", time: "20 minutes ago", color: "#1E3A8A" },
+        { title: "Route Updated", time: "1 hour ago", color: "#F59E0B" },
+        { title: "New Message Received", time: "2 hours ago", color: "#EF4444" },
+      ]
+    : isFreightOwner
+    ? [
+        { title: "New Load Posted", time: "10 minutes ago", color: "#22C55E" },
+        { title: "Transporter Accepted", time: "35 minutes ago", color: "#1E3A8A" },
+        { title: "Shipment In Transit", time: "1 hour ago", color: "#F59E0B" },
+        { title: "Invoice Requested", time: "2 hours ago", color: "#EF4444" },
+      ]
+    : [
+        { title: "New Load Posted", time: "5 minutes ago", color: "#22C55E" },
+        { title: "Shipment Delivered", time: "20 minutes ago", color: "#1E3A8A" },
+        { title: "Transporter Accepted Load", time: "1 hour ago", color: "#F59E0B" },
+        { title: "New Message Received", time: "2 hours ago", color: "#EF4444" },
+      ];
+
   return (
     <DashboardLayouts>
       <div style={{ display: "flex", flexDirection: "column", gap: "24px" }}>
@@ -91,10 +158,10 @@ const Dashboard = () => {
         >
           <div>
             <h1 style={{ margin: 0, fontSize: "2rem", color: "#111827" }}>
-              Welcome Back
+              Welcome Back, {user?.firstName || "there"}
             </h1>
             <p style={{ margin: "6px 0 0", color: "#6B7280", fontSize: "1rem" }}>
-              Here's an overview of today's logistics activity.
+              {roleLabel} dashboard overview for today's logistics activity.
             </p>
           </div>
 
@@ -108,7 +175,7 @@ const Dashboard = () => {
               fontSize: "14px",
             }}
           >
-            12 active shipments
+            {isTransporter ? "12 active trips" : isFreightOwner ? "6 active shipments" : "12 active shipments"}
           </div>
         </div>
 
@@ -119,10 +186,9 @@ const Dashboard = () => {
             gap: "20px",
           }}
         >
-          <StatCard title="Active Loads" value="42" icon={<FaTruck />} color="#1E3A8A" />
-          <StatCard title="Shipments" value="18" icon={<FaClipboardList />} color="#F59E0B" />
-          <StatCard title="Successful Matches" value="31" icon={<FaHandshake />} color="#22C55E" />
-          <StatCard title="Revenue" value="$42,800" icon={<FaDollarSign />} color="#0EA5E9" />
+          {statCards.map((card) => (
+            <StatCard key={card.title} title={card.title} value={card.value} icon={card.icon} color={card.color} />
+          ))}
         </div>
 
         <AnalyticsCard />
@@ -141,10 +207,9 @@ const Dashboard = () => {
               gap: "16px",
             }}
           >
-            <QuickActionCard title="Post Load" icon={<FaTruck />} />
-            <QuickActionCard title="Shipments" icon={<FaClipboardList />} />
-            <QuickActionCard title="Tracking" icon={<FaMapMarkedAlt />} />
-            <QuickActionCard title="Reports" icon={<FaChartBar />} />
+            {quickActions.map((action) => (
+              <QuickActionCard key={action.title} title={action.title} icon={action.icon} />
+            ))}
           </div>
         </div>
 
@@ -163,10 +228,9 @@ const Dashboard = () => {
               border: "1px solid #f3f4f6",
             }}
           >
-            <ActivityCard title="New Load Posted" time="5 minutes ago" color="#22C55E" />
-            <ActivityCard title="Shipment Delivered" time="20 minutes ago" color="#1E3A8A" />
-            <ActivityCard title="Transporter Accepted Load" time="1 hour ago" color="#F59E0B" />
-            <ActivityCard title="New Message Received" time="2 hours ago" color="#EF4444" />
+            {activityFeed.map((item) => (
+              <ActivityCard key={item.title} title={item.title} time={item.time} color={item.color} />
+            ))}
           </div>
         </div>
       </div>

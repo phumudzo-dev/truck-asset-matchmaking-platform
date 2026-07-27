@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import {
   FaUser,
   FaEnvelope,
@@ -17,7 +17,8 @@ import {
 
 import "./Register.css";
 
-const Register = () => {
+const Register = ({ onRegister }) => {
+  const navigate = useNavigate();
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const [formData, setFormData] = useState({
@@ -43,7 +44,7 @@ const Register = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log("Register form submitted:", formData);
+    onRegister(formData, navigate);
   };
 
   return (
@@ -338,15 +339,15 @@ const Register = () => {
                   Choose your role
                 </option>
 
-                <option>
+                <option value="Freight Owner">
                   Freight Owner
                 </option>
 
-                <option>
+                <option value="Transporter">
                   Transporter
                 </option>
 
-                <option>
+                <option value="Administrator">
                   Administrator
                 </option>
 
