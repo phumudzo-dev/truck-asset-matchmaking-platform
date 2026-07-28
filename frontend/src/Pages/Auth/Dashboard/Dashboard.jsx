@@ -215,7 +215,7 @@ const Dashboard = ({ user }) => {
                     <div style={{ maxHeight: "230px", overflowY: "auto", border: "1px solid #e5e7eb", borderRadius: "12px" }}><table style={{ width: "100%", borderCollapse: "collapse", minWidth: "420px" }}><thead style={{ position: "sticky", top: 0, background: "#f8fafc" }}><tr><th style={{ padding: "12px", textAlign: "left" }}>ID</th><th style={{ padding: "12px", textAlign: "left" }}>Title</th><th style={{ padding: "12px", textAlign: "left" }}>Status</th></tr></thead><tbody>{previewRows.map((row) => <tr key={row.id} style={{ borderTop: "1px solid #eef2f7" }}><td style={{ padding: "12px", fontWeight: 600 }}>{row.id}</td><td style={{ padding: "12px" }}>{row.title}</td><td style={{ padding: "12px" }}><span style={{ color: row.status === "Delivered" ? "#15803d" : row.status === "Pending" ? "#b45309" : "#1d4ed8", fontWeight: 700 }}>{row.status}</span></td></tr>)}</tbody></table></div>
                 </section>}
 
-                <AnalyticsCard onClick={() => navigate("/reports")} />
+                <AnalyticsCard onClick={(timeframe) => navigate("/reports", { state: { timeframe } })} />
                 <TrackingCard />
 
                 <div style={{ display: "flex", flexDirection: "column", gap: "16px" }}>
