@@ -206,7 +206,7 @@ const Dashboard = ({ user }) => {
                     }}
                 >
                     {statCards.map((card) => (
-                        <StatCard key={card.title} title={card.title} value={card.value} icon={card.icon} color={card.color} onClick={() => (card.path === "/my-loads" || card.path === "/shipments") ? setOpenPreview(card.path === "/my-loads" ? "loads" : "shipments") : navigate(card.path)} />
+                        <StatCard key={card.title} title={card.title} value={card.value} icon={card.icon} color={card.color} onClick={() => navigate(card.path)} />
                     ))}
                 </div>
 
