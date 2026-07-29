@@ -132,6 +132,11 @@ border:none;
 border-radius:8px;
 background:#EEF2FF;
 cursor:pointer;
+color:#1E3A8A;
+}
+
+.actions .action{
+background:#E0F2FE;
 }
 
 .delete{
