@@ -59,6 +59,19 @@ const PostLoad = () => {
     try {
       const existing = JSON.parse(localStorage.getItem("tamp-published-loads") || "[]");
       localStorage.setItem("tamp-published-loads", JSON.stringify([newLoad, ...existing]));
+
+      const reportItem = {
+        id: `RPT-${Math.floor(1000 + Math.random() * 9000)}`,
+        title: `New Load Added: ${loadData.title}`,
+        generated: new Date().toLocaleDateString("en-GB", {
+          day: "2-digit",
+          month: "short",
+          year: "numeric",
+        }),
+        status: "Completed",
+      };
+      const savedReports = JSON.parse(localStorage.getItem("tamp-reports") || "[]");
+      localStorage.setItem("tamp-reports", JSON.stringify([reportItem, ...savedReports]));
     } catch (err) {
       console.error(err);
     }
