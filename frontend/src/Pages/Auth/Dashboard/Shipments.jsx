@@ -181,7 +181,6 @@ const Shipments = () => {
 
       </div>
     </div>
-    </DashboardLayout>
   );
 };
 
