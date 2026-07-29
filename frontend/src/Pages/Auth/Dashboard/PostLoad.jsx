@@ -47,7 +47,21 @@ const PostLoad = () => {
       return;
     }
 
-    console.log(loadData);
+    const newLoad = {
+      id: `LD-${Math.floor(1007 + Math.random() * 9000)}`,
+      title: loadData.title,
+      pickup: loadData.pickupCity || loadData.pickupAddress,
+      delivery: loadData.deliveryCity || loadData.deliveryAddress,
+      status: "Pending",
+      date: new Date().toLocaleDateString("en-GB", { day: "2-digit", month: "short", year: "numeric" }),
+    };
+
+    try {
+      const existing = JSON.parse(localStorage.getItem("tamp-published-loads") || "[]");
+      localStorage.setItem("tamp-published-loads", JSON.stringify([newLoad, ...existing]));
+    } catch (err) {
+      console.error(err);
+    }
 
     alert("Load submitted successfully!");
 
