@@ -11,7 +11,7 @@ import {
 
 import "./MyLoads.css";
 
-const loads = [
+const initialLoads = [
   {
     id: "LD-1001",
     title: "Cement Bags",
@@ -45,8 +45,29 @@ const MyLoads = () => {
   const navigate = useNavigate();
   const [query, setQuery] = useState("");
   const [filter, setFilter] = useState("All");
-  const filteredLoads = loads.filter((load) => {
-    const matchesSearch = Object.values(load).some((value) => value.toLowerCase().includes(query.toLowerCase()));
+  const [loadList, setLoadList] = useState(() => {
+    try {
+      const saved = localStorage.getItem("tamp-published-loads");
+      const parsed = saved ? JSON.parse(saved) : [];
+      return [...parsed, ...initialLoads];
+    } catch {
+      return initialLoads;
+    }
+  });
+
+  const handleDelete = (id) => {
+    const updated = loadList.filter((item) => item.id !== id);
+    setLoadList(updated);
+    try {
+      const storedPublished = JSON.parse(localStorage.getItem("tamp-published-loads") || "[]");
+      localStorage.setItem("tamp-published-loads", JSON.stringify(storedPublished.filter((item) => item.id !== id)));
+    } catch (err) {
+      console.error(err);
+    }
+  };
+
+  const filteredLoads = loadList.filter((load) => {
+    const matchesSearch = Object.values(load).some((value) => String(value).toLowerCase().includes(query.toLowerCase()));
     return matchesSearch && (filter === "All" || load.status === filter);
   });
   return (
@@ -168,7 +189,7 @@ const MyLoads = () => {
 
                     </button>
 
-                    <button className="delete">
+                    <button className="delete" onClick={() => handleDelete(load.id)} aria-label={`Delete ${load.id}`}>
 
                       <FaTrash />
 
