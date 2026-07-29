@@ -50,10 +50,27 @@ const PostLoad = () => {
     const newLoad = {
       id: `LD-${Math.floor(1007 + Math.random() * 9000)}`,
       title: loadData.title,
+      cargoType: loadData.cargoType,
+      weight: loadData.weight,
+      quantity: loadData.quantity,
+      pickupAddress: loadData.pickupAddress,
+      pickupCity: loadData.pickupCity,
+      pickupProvince: loadData.pickupProvince,
+      pickupDate: loadData.pickupDate,
+      deliveryAddress: loadData.deliveryAddress,
+      deliveryCity: loadData.deliveryCity,
+      deliveryProvince: loadData.deliveryProvince,
+      deliveryDate: loadData.deliveryDate,
+      truckType: loadData.truckType,
+      trailerType: loadData.trailerType,
+      temperatureControlled: loadData.temperatureControlled,
+      hazardousGoods: loadData.hazardousGoods,
+      notes: loadData.notes,
       pickup: loadData.pickupCity || loadData.pickupAddress,
       delivery: loadData.deliveryCity || loadData.deliveryAddress,
       status: "Pending",
       date: new Date().toLocaleDateString("en-GB", { day: "2-digit", month: "short", year: "numeric" }),
+      revenue: "R0",
     };
 
     try {

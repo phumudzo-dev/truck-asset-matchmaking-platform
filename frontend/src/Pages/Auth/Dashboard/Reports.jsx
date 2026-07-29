@@ -89,17 +89,22 @@ const Reports = () => {
       loads.map((load) => ({
         ID: load.id,
         Title: load.title,
-        Pickup: load.pickup,
-        Delivery: load.delivery,
+        Cargo: load.cargoType || "",
+        Weight: load.weight || "",
+        Quantity: load.quantity || "",
+        Pickup: load.pickup || load.pickupCity || load.pickupAddress || "",
+        Delivery: load.delivery || load.deliveryCity || load.deliveryAddress || "",
         Status: load.status,
         Date: load.date,
+        Truck: load.truckType || "",
+        Trailer: load.trailerType || "",
         Revenue: load.revenue || "R0",
       })),
     [loads]
   );
 
   const exportPdf = () => {
-    const doc = new jsPDF();
+    const doc = new jsPDF({ unit: "pt", format: "a4" });
     const title = "TAMP Load Report";
     const generated = new Date().toLocaleString("en-GB", {
       day: "2-digit",
@@ -110,28 +115,50 @@ const Reports = () => {
     });
 
     doc.setFontSize(18);
-    doc.text(title, 14, 20);
+    doc.text(title, 40, 50);
     doc.setFontSize(11);
-    doc.text(`Generated: ${generated}`, 14, 30);
-    doc.text(`Total loads: ${totals.totalLoads}`, 14, 40);
-    doc.text(`Completed deliveries: ${totals.completedDeliveries}`, 14, 47);
-    doc.text(`Delivery success: ${totals.deliverySuccess}%`, 14, 54);
-    doc.text(`Total revenue: R${totals.totalRevenue.toLocaleString()}`, 14, 61);
+    doc.text(`Generated: ${generated}`, 40, 70);
+    doc.text(`Total loads: ${totals.totalLoads}`, 40, 88);
+    doc.text(`Completed deliveries: ${totals.completedDeliveries}`, 40, 104);
+    doc.text(`Delivery success: ${totals.deliverySuccess}%`, 40, 120);
+    doc.text(`Total revenue: R${totals.totalRevenue.toLocaleString()}`, 40, 136);
 
-    const headers = ["ID", "Title", "Pickup", "Delivery", "Status", "Date", "Revenue"];
-    let y = 75;
-    doc.setFontSize(10);
-    doc.text(headers.join("  "), 14, y);
-    y += 8;
+    const headers = ["ID", "Title", "Pickup", "Delivery", "Status", "Date", "Cargo", "Weight", "Qty", "Truck"];
+    const columns = [40, 100, 220, 320, 420, 480, 530, 590, 640, 690];
+    let y = 170;
+    doc.setFontSize(9);
+    headers.forEach((header, index) => doc.text(header, columns[index], y));
+    y += 14;
+    doc.setLineWidth(0.5);
+    doc.line(40, y - 6, 750, y - 6);
 
-    loadSummaryRows.slice(0, 18).forEach((row) => {
-      const rowText = headers.map((key) => String(row[key] || "")).join("  ");
-      if (y > 270) {
+    loadSummaryRows.forEach((row) => {
+      if (y > 760) {
         doc.addPage();
-        y = 20;
+        y = 50;
+        headers.forEach((header, index) => doc.text(header, columns[index], y));
+        y += 16;
+        doc.line(40, y - 6, 750, y - 6);
       }
-      doc.text(rowText, 14, y);
-      y += 7;
+
+      const rowValues = [
+        row.ID,
+        row.Title,
+        row.Pickup,
+        row.Delivery,
+        row.Status,
+        row.Date,
+        row.Cargo,
+        row.Weight,
+        row.Quantity,
+        row.Truck,
+      ];
+
+      rowValues.forEach((value, index) => {
+        const text = String(value || "").slice(0, 14);
+        doc.text(text, columns[index], y);
+      });
+      y += 14;
     });
 
     doc.save(`tamp-load-report-${new Date().getTime()}.pdf`);
