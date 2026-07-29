@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import DashboardLayout from "../../layouts/DashboardLayout";
 import {
@@ -12,14 +13,39 @@ import {
 
 import "./Settings.css";
 
-const Settings = ({ onLogout }) => {
+const Settings = ({ onLogout, onPasswordChange }) => {
   const navigate = useNavigate();
+  const [showPasswordModal, setShowPasswordModal] = useState(false);
+  const [currentPassword, setCurrentPassword] = useState("");
+  const [newPassword, setNewPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
+  const [message, setMessage] = useState("");
 
   const handleLogout = () => {
     if (onLogout) {
       onLogout(navigate);
     } else {
       navigate("/login");
+    }
+  };
+
+  const handlePasswordSubmit = (event) => {
+    event.preventDefault();
+
+    if (newPassword !== confirmPassword) {
+      setMessage("New passwords do not match.");
+      return;
+    }
+
+    if (onPasswordChange) {
+      const success = onPasswordChange(currentPassword, newPassword);
+      if (success) {
+        setMessage("Password changed successfully.");
+        setCurrentPassword("");
+        setNewPassword("");
+        setConfirmPassword("");
+        setShowPasswordModal(false);
+      }
     }
   };
 
@@ -101,7 +127,7 @@ const Settings = ({ onLogout }) => {
             <input type="checkbox" />
           </label>
 
-          <button className="secondary-btn">
+          <button className="secondary-btn" onClick={() => setShowPasswordModal(true)}>
             Change Password
           </button>
 
@@ -140,6 +166,44 @@ const Settings = ({ onLogout }) => {
         </button>
 
       </div>
+
+      {showPasswordModal && (
+        <div className="password-modal-overlay" onClick={() => setShowPasswordModal(false)}>
+          <div className="password-modal" onClick={(event) => event.stopPropagation()}>
+            <h3>Change Password</h3>
+            <p>Use your current password and set a new one.</p>
+            {message && <p className="password-message">{message}</p>}
+            <form onSubmit={handlePasswordSubmit} className="password-form">
+              <input
+                type="password"
+                placeholder="Current password"
+                value={currentPassword}
+                onChange={(event) => setCurrentPassword(event.target.value)}
+              />
+              <input
+                type="password"
+                placeholder="New password"
+                value={newPassword}
+                onChange={(event) => setNewPassword(event.target.value)}
+              />
+              <input
+                type="password"
+                placeholder="Confirm new password"
+                value={confirmPassword}
+                onChange={(event) => setConfirmPassword(event.target.value)}
+              />
+              <div className="password-actions">
+                <button type="button" className="secondary-btn" onClick={() => setShowPasswordModal(false)}>
+                  Cancel
+                </button>
+                <button type="submit" className="save-btn">
+                  Update Password
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      )}
 
     </DashboardLayout>
   );

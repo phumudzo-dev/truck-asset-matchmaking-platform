@@ -101,6 +101,35 @@ function App() {
     }
   };
 
+  const handlePasswordChange = (currentPassword, newPassword) => {
+    if (!currentUser) {
+      alert("Please log in first.");
+      return false;
+    }
+
+    if (currentUser.password !== currentPassword) {
+      alert("Current password is incorrect.");
+      return false;
+    }
+
+    if (!newPassword || newPassword.length < 6) {
+      alert("New password must be at least 6 characters long.");
+      return false;
+    }
+
+    const updatedUser = { ...currentUser, password: newPassword };
+    const updatedAccounts = accounts.map((account) =>
+      account.id === currentUser.id ? updatedUser : account
+    );
+
+    setAccounts(updatedAccounts);
+    setCurrentUser(updatedUser);
+    localStorage.setItem("tamp-accounts", JSON.stringify(updatedAccounts));
+    localStorage.setItem("tamp-user", JSON.stringify(updatedUser));
+
+    return true;
+  };
+
   return (
     <>
     <Routes>
@@ -119,7 +148,7 @@ function App() {
       <Route path="/messages" element={<Messages />} />
       <Route path="/reports" element={<Reports />} />
       <Route path="/profile" element={<Profile />} />
-      <Route path="/settings" element={<Settings onLogout={handleLogout} />} />
+      <Route path="/settings" element={<Settings onLogout={handleLogout} onPasswordChange={handlePasswordChange} />} />
       <Route path="/notifications" element={<Notifications />} />
     </Routes>
     <SaveFeedback />
