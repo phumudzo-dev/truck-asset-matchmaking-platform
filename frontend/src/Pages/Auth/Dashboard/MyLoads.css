@@ -2,63 +2,66 @@
 display:flex;
 justify-content:space-between;
 align-items:center;
-margin-bottom:30px;
+margin-bottom:12px;
 }
 
 .loads-header h1{
 color:#1E3A8A;
-font-size:34px;
-margin-bottom:8px;
+font-size:24px;
+margin-bottom:4px;
 }
 
 .loads-header p{
 color:#6B7280;
+font-size:14px;
 }
 
 .new-load-btn{
 display:flex;
 align-items:center;
-gap:10px;
-padding:14px 22px;
+gap:8px;
+padding:8px 16px;
 background:#1E3A8A;
 color:white;
 border:none;
-border-radius:12px;
+border-radius:10px;
 cursor:pointer;
 font-weight:600;
+font-size:14px;
 }
 
 .search-bar{
 display:flex;
 align-items:center;
-gap:15px;
+gap:12px;
 background:white;
-padding:16px;
-border-radius:14px;
-margin-bottom:25px;
-box-shadow:0 10px 25px rgba(0,0,0,.05);
+padding:10px 14px;
+border-radius:12px;
+margin-bottom:12px;
+box-shadow:0 4px 15px rgba(0,0,0,.04);
 }
 
 .search-bar input{
 width:100%;
 border:none;
 outline:none;
-font-size:16px;
+font-size:14px;
 }
 
 .filters{
 display:flex;
-gap:15px;
-margin-bottom:25px;
+gap:10px;
+margin-bottom:12px;
 flex-wrap:wrap;
 }
 
 .filters button{
-padding:10px 20px;
+padding:6px 14px;
 border:none;
-border-radius:30px;
+border-radius:20px;
 background:#E5E7EB;
 cursor:pointer;
+font-size:13px;
 }
 
 .filters .active{
@@ -68,10 +71,11 @@ color:white;
 
 .loads-table{
 background:white;
-border-radius:20px;
-overflow:hidden;
-box-shadow:0 10px 25px rgba(0,0,0,.05);
+border-radius:16px;
 overflow-x:auto;
+overflow-y:auto;
+box-shadow:0 4px 15px rgba(0,0,0,.04);
+max-height:calc(100dvh - 230px);
 }
 
 table{
@@ -80,12 +84,16 @@ border-collapse:collapse;
 }
 
 th,td{
-padding:18px;
+padding:10px 14px;
 text-align:left;
+font-size:14px;
 }
 
 thead{
 background:#F3F4F6;
+position:sticky;
+top:0;
+z-index:1;
 }
 
 tbody tr{
@@ -93,10 +101,11 @@ border-bottom:1px solid #eee;
 }
 
 .status{
-padding:7px 15px;
+padding:4px 12px;
 border-radius:20px;
 color:white;
-font-size:13px;
+font-size:12px;
+font-weight:600;
 }
 
 .pending{
@@ -113,12 +122,12 @@ background:#22C55E;
 
 .actions{
 display:flex;
-gap:10px;
+gap:6px;
 }
 
 .actions button{
-width:38px;
-height:38px;
+width:32px;
+height:32px;
 border:none;
 border-radius:8px;
 background:#EEF2FF;
@@ -130,4 +139,4 @@ background:#FEE2E2 !important;
 color:#DC2626;
 }
 
-.empty-state { text-align: center; color: #6b7280; padding: 32px; }
+.empty-state { text-align: center; color: #6b7280; padding: 20px; }
