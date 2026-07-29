@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { jsPDF } from "jspdf";
 import DashboardLayout from "../../layouts/DashboardLayout";
 import { useNavigate } from "react-router-dom";
 import {
@@ -7,6 +8,7 @@ import {
   FaEye,
   FaEdit,
   FaTrash,
+  FaFileAlt,
 } from "react-icons/fa";
 
 import "./MyLoads.css";
@@ -64,6 +66,45 @@ const MyLoads = () => {
     } catch (err) {
       console.error(err);
     }
+  };
+
+  const generateLoadReport = (load) => {
+    const report = {
+      id: `RPT-${Math.floor(1000 + Math.random() * 9000)}`,
+      title: `Load Report: ${load.title}`,
+      generated: new Date().toLocaleDateString("en-GB", {
+        day: "2-digit",
+        month: "short",
+        year: "numeric",
+      }),
+      status: "Completed",
+    };
+
+    try {
+      const savedReports = JSON.parse(localStorage.getItem("tamp-reports") || "[]");
+      localStorage.setItem("tamp-reports", JSON.stringify([report, ...savedReports]));
+    } catch (err) {
+      console.error(err);
+    }
+
+    const doc = new jsPDF({ unit: "pt", format: "a4" });
+    doc.setFontSize(18);
+    doc.text(`Load Report`, 40, 50);
+    doc.setFontSize(12);
+    doc.text(`Report ID: ${report.id}`, 40, 80);
+    doc.text(`Generated: ${report.generated}`, 40, 100);
+    doc.text(`Load Title: ${load.title}`, 40, 130);
+    doc.text(`Pickup: ${load.pickup || load.pickupCity || load.pickupAddress || "N/A"}`, 40, 150);
+    doc.text(`Delivery: ${load.delivery || load.deliveryCity || load.deliveryAddress || "N/A"}`, 40, 170);
+    doc.text(`Status: ${load.status}`, 40, 190);
+    doc.text(`Cargo: ${load.cargoType || "N/A"}`, 40, 210);
+    doc.text(`Weight: ${load.weight || "N/A"}`, 40, 230);
+    doc.text(`Quantity: ${load.quantity || "N/A"}`, 40, 250);
+    doc.text(`Truck type: ${load.truckType || "N/A"}`, 40, 270);
+    doc.text(`Trailer type: ${load.trailerType || "N/A"}`, 40, 290);
+    doc.text(`Notes: ${load.notes || "N/A"}`, 40, 310);
+
+    doc.save(`${report.id}.pdf`);
   };
 
   const filteredLoads = loadList.filter((load) => {
@@ -186,6 +227,12 @@ const MyLoads = () => {
                     <button onClick={() => navigate("/post-load")} aria-label={`Edit ${load.id}`}>
 
                       <FaEdit />
+
+                    </button>
+
+                    <button className="action" onClick={() => generateLoadReport(load)} aria-label={`Generate report for ${load.id}`}>
+
+                      <FaFileAlt />
 
                     </button>
 
