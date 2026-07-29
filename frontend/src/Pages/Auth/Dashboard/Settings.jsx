@@ -1,3 +1,4 @@
+import { useNavigate } from "react-router-dom";
 import DashboardLayout from "../../layouts/DashboardLayout";
 import {
   FaBell,
@@ -11,7 +12,17 @@ import {
 
 import "./Settings.css";
 
-const Settings = () => {
+const Settings = ({ onLogout }) => {
+  const navigate = useNavigate();
+
+  const handleLogout = () => {
+    if (onLogout) {
+      onLogout(navigate);
+    } else {
+      navigate("/login");
+    }
+  };
+
   return (
     <DashboardLayout>
 
@@ -123,7 +134,7 @@ const Settings = () => {
           Save Changes
         </button>
 
-        <button className="logout-btn">
+        <button className="logout-btn" onClick={handleLogout}>
           <FaSignOutAlt />
           Logout
         </button>

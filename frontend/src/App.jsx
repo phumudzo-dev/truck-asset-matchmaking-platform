@@ -93,6 +93,14 @@ function App() {
     navigate("/dashboard");
   };
 
+  const handleLogout = (navigate) => {
+    setCurrentUser(null);
+    localStorage.removeItem("tamp-user");
+    if (navigate) {
+      navigate("/login");
+    }
+  };
+
   return (
     <>
     <Routes>
@@ -111,7 +119,7 @@ function App() {
       <Route path="/messages" element={<Messages />} />
       <Route path="/reports" element={<Reports />} />
       <Route path="/profile" element={<Profile />} />
-      <Route path="/settings" element={<Settings />} />
+      <Route path="/settings" element={<Settings onLogout={handleLogout} />} />
       <Route path="/notifications" element={<Notifications />} />
     </Routes>
     <SaveFeedback />
