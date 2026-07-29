@@ -145,6 +145,15 @@ gap:10px;
 margin-top:8px;
 }
 
+.password-actions .secondary-btn,
+.password-actions .save-btn{
+flex:1;
+justify-content:center;
+min-width:140px;
+padding:12px 16px;
+margin-top:0;
+}
+
 .password-message{
 color:#1D4ED8;
 font-weight:600;
