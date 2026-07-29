@@ -54,15 +54,13 @@ const Shipments = () => {
   });
   return (
     <DashboardLayout>
-
-      <div className="shipments-header">
-
-        <div>
-          <h1>Shipments</h1>
-          <p>Monitor all active and completed shipments.</p>
+      <div className="shipments-page">
+        <div className="shipments-header">
+          <div>
+            <h1>Shipments</h1>
+            <p>Monitor all active and completed shipments.</p>
+          </div>
         </div>
-
-      </div>
 
       <div className="shipment-stats">
 
@@ -101,9 +99,7 @@ const Shipments = () => {
       </div>
 
       <div className="shipments-table">
-
         <table>
-
           <thead>
 
             <tr>
@@ -183,6 +179,8 @@ const Shipments = () => {
 
       </div>
 
+      </div>
+      </div>
     </DashboardLayout>
   );
 };
