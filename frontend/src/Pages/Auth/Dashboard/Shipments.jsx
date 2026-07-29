@@ -178,9 +178,8 @@ const Shipments = () => {
         </table>
 
       </div>
-
-      </div>
     </div>
+    </DashboardLayout>
   );
 };
 
