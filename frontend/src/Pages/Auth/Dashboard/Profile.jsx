@@ -16,10 +16,29 @@ import "./Profile.css";
 
 const Profile = () => {
   const [dialog, setDialog] = useState(null);
-  const [profile, setProfile] = useState({ name: "Phumudzo Mulaudzi", email: "phumudzo@example.com", phone: "+27 68 671 5262", location: "Johannesburg, South Africa" });
+  const [profile, setProfile] = useState(() => {
+    const savedProfile = localStorage.getItem("tamp-profile");
+    return savedProfile
+      ? JSON.parse(savedProfile)
+      : { name: "Phumudzo Mulaudzi", email: "phumudzo@example.com", phone: "+27 68 671 5262", location: "Johannesburg, South Africa" };
+  });
   const [passwords, setPasswords] = useState({ current: "", next: "", confirm: "" });
-  const saveProfile = (event) => { event.preventDefault(); localStorage.setItem("tamp-profile", JSON.stringify(profile)); setDialog(null); alert("Profile details saved successfully."); };
-  const changePassword = (event) => { event.preventDefault(); if (!passwords.current || !passwords.next || passwords.next !== passwords.confirm) { alert("Enter your current password and matching new passwords."); return; } setDialog(null); setPasswords({ current: "", next: "", confirm: "" }); alert("Your password has been updated."); };
+  const saveProfile = (event) => {
+    event.preventDefault();
+    localStorage.setItem("tamp-profile", JSON.stringify(profile));
+    setDialog(null);
+    alert("Profile details saved successfully.");
+  };
+  const changePassword = (event) => {
+    event.preventDefault();
+    if (!passwords.current || !passwords.next || passwords.next !== passwords.confirm) {
+      alert("Enter your current password and matching new passwords.");
+      return;
+    }
+    setDialog(null);
+    setPasswords({ current: "", next: "", confirm: "" });
+    alert("Your password has been updated.");
+  };
   return (
     <DashboardLayout>
 
